@@ -1,1 +1,3 @@
 fastapi[all]
+rope
+flake8
