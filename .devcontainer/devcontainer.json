@@ -7,9 +7,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		8080
-	],
+	// "forwardPorts": [8000],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "pip3 install --user -r requirements.txt",
 	// Configure tool-specific properties.
@@ -22,7 +20,10 @@
 				"files.autoSave": "afterDelay",
 				"editor.formatOnPaste": true,
 				"editor.fontSize": 15,
+				"terminal.integrated.fontSize": 14,
 				"workbench.iconTheme": "material-icon-theme",
+				"workbench.colorTheme": "GitHub Dark",
+				"continue.enableTabAutocomplete": false,
 				// to do tree settings
 				"todo-tree.highlights.defaultHighlight": {
 					"icon": "alert",
@@ -95,11 +96,17 @@
 			"extensions": [
 				"ms-python.python",
 				"ms-python.debugpy",
+				"ms-toolsai.jupyter",
 				"ms-python.autopep8",
 				"ms-python.flake8",
 				"oderwat.indent-rainbow",
 				"gruntfuggly.todo-tree",
-				"pkief.material-icon-theme"
+				"pkief.material-icon-theme",
+				"qwtel.sqlite-viewer",
+				"streetsidesoftware.code-spell-checker",
+				"github.github-vscode-theme",
+				"continue.continue",
+				"usernamehw.errorlens"
 			]
 		}
 	}
