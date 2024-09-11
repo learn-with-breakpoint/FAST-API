@@ -1,13 +1,29 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Python 3",
+	"name": "python-db-copilot",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	"portsAttributes": {
+		"5432": {
+			"label": "PostgreSQL port",
+			"onAutoForward": "silent"
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/sshd:1": {
+			"version": "latest"
+		}
+	},
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
+	// "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [8000],
+	"forwardPorts": [
+		5432
+	],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "pip3 install --user -r requirements.txt",
 	// Configure tool-specific properties.
@@ -90,7 +106,46 @@
 					"markdown",
 					"python",
 					"cpp"
-				]
+				],
+				"[jsonc]": {
+					"editor.defaultFormatter": "vscode.json-language-features"
+				},
+				"sqltools.connections": [
+					{
+						"name": "Local database",
+						"driver": "PostgreSQL",
+						"server": "localhost",
+						"port": 5432,
+						"database": "postgres",
+						"username": "admin",
+						"password": "LocalPasswordOnly"
+					},
+					{
+						"name": "Azure database",
+						"driver": "PostgreSQL",
+						"server": "<HOSTNAME>.postgres.database.azure.com",
+						"port": 5432,
+						"database": "postgres",
+						"username": "<USERNAME>",
+						"askForPassword": true,
+						"pgOptions": {
+							"ssl": true
+						}
+					},
+					{
+						"previewLimit": 50,
+						"server": "localhost",
+						"port": 5432,
+						"driver": "PostgreSQL",
+						"name": "book_store",
+						"database": "bookstore",
+						"username": "admin"
+					}
+				],
+				"files.exclude": {
+					".ruff_cache": true,
+					".pytest_cache": true
+				}
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
@@ -106,7 +161,11 @@
 				"streetsidesoftware.code-spell-checker",
 				"github.github-vscode-theme",
 				"continue.continue",
-				"usernamehw.errorlens"
+				"usernamehw.errorlens",
+				"charliermarsh.ruff",
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-pg",
+				"ms-vscode.vscode-node-azure-pack"
 			]
 		}
 	}
