@@ -1,3 +1,4 @@
 fastapi[all]
 rope
 flake8
+psycopg2
